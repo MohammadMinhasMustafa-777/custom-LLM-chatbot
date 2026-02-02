@@ -1,0 +1,7 @@
+transformers
+peft
+gradio
+datasets
+torch
+sentence-transformers  # For RAG
+pypdf  # For PDF extraction
