@@ -1,18 +1,21 @@
 import gradio as gr
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
+from peft import PeftModel
 
-fine_tuned_model_path = r"C:\Python 2k25\4_LLMs_Basics\Day_5_Mini_Project_Custom_LLM_Chatbot\Model_for_GPT-2_fine_tuned_for_custom_ChatBOT"
+base_model = "distilgpt2"                                                       # Base from HF
+Hf_repo = "MohammadMinhasMustafa/distilgpt2_fine_tuned_for_custom_ChatBOT"      # HF repo
 
-tokenizer = AutoTokenizer.from_pretrained(fine_tuned_model_path)
-model = AutoModelForCausalLM.from_pretrained(fine_tuned_model_path)
+tokenizer = AutoTokenizer.from_pretrained(base_model)
+model = AutoModelForCausalLM.from_pretrained(base_model)
+model = PeftModel.from_pretrained(model, Hf_repo)                               # Add adapters
 
 def chatbot(prompt):
     inputs = tokenizer(prompt, return_tensors = 'pt')
-    with torch.no_grad():           # Saves Memory and Speed
+    with torch.no_grad():               # Saves Memory and Speed
         outputs = model.generate(
             inputs['input_ids'], 
-            max_length = 50,
+            max_length = 150,
             temperature = 0.7,          # Balanced creativity
             do_sample = True,           # For variety
             top_k = 40,
@@ -22,4 +25,4 @@ def chatbot(prompt):
     generated_text = tokenizer.decode(outputs[0])
     return generated_text[len(prompt):].strip()  # Trim prompt, remove extras
 
-gr.Interface(fn=chatbot, inputs="text", outputs="text").launch(share=True)
+gr.Interface(fn=chatbot, inputs="text", outputs="text", title="My Custom Chatbot", description="Ask anything!").launch(share=True)

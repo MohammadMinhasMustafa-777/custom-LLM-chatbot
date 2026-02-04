@@ -1,6 +1,6 @@
 ## Custom LLM Chatbot
 
-Mini-project: Fine-tuned GPT-2 on personal notes Q&A for a custom chatbot. Built with Gradio, deployed on Hugging Face Spaces.
+Mini-project: Fine-tuned distillgpt2 on personal notes Q&A for a custom chatbot. Built with Gradio, deployed on Hugging Face Spaces.
 
 # Features
 
@@ -22,7 +22,7 @@ Run app: python gradio_app.py
 
 # Deployment
 
-Hugging Face Space: https://huggingface.co/spaces/MohammadMinhasMustafa/custom-chatbot
+Hugging Face Space: https://huggingface.co/spaces/MohammadMinhasMustafa/custom_ChatBot
 
 # Data
 
