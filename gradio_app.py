@@ -32,6 +32,7 @@ gr.Interface(fn=chatbot,
              description="Chat with AI tuned on my notes! Ask generic QnAs",  # Intro text"
              theme = gr.themes.Soft(primary_hue = "blue", secondary_hue="gray"),  # Attractive theme
              examples=[["What is your favorite color and why?"], ["What is the capital city of Pakistan?"]],  # Quick-click examples
-             flagging_mode = "never"   # Hide flag button
+             flagging_mode = "never",    # Hide flag button
+             preload_example = False     # his prevents auto-filling the input on load.
              
              ).launch(share=True)
