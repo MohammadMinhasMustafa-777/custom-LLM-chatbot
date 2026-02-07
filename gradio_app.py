@@ -25,4 +25,13 @@ def chatbot(prompt):
     generated_text = tokenizer.decode(outputs[0])
     return generated_text[len(prompt):].strip()  # Trim prompt, remove extras
 
-gr.Interface(fn=chatbot, inputs="text", outputs="text", title="My Custom Chatbot", description="Ask anything!").launch(share=True)
+gr.Interface(fn=chatbot, 
+             inputs=gr.Textbox(label="Ask Anything", placeholder="Type your question here..."), # Nicer input with label/placeholder
+             outputs=gr.Textbox(label="Response"), 
+             title="My Custom Chatbot", 
+             description="Chat with AI tuned on my notes! Ask generic QnAs",  # Intro text"
+             theme = gr.themes.Soft(primary_hue = "blue", secondary_hue="gray"),  # Attractive theme
+             examples=[["What is your favorite color and why?"], ["What is the capital city of Pakistan?"]],  # Quick-click examples
+             flagging_mode = "never"   # Hide flag button
+             
+             ).launch(share=True)
